@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary -->
+    <color name="deep_mahogany">#FF3B2314</color>
+    <color name="burnt_sienna">#FFC0602A</color>
+    <color name="amber_glow">#FFE8924E</color>
+    <color name="parchment">#FFFAE3C8</color>
+
+    <!-- Accent & Neutral -->
+    <color name="midnight_ink">#FF2B4A6F</color>
+    <color name="sage">#FF4A8C6E</color>
+    <color name="ivory">#FFF5F0E8</color>
+    <color name="dark_walnut">#FF4A3728</color>
+
+    <!-- Typography -->
+    <color name="text_title">#FF3B2314</color>
+    <color name="text_author">#FFC0602A</color>
+    <color name="text_body">#FF4A3728</color>
+    <color name="text_muted">#FF8A7060</color>
+
+    <!-- Status Badges -->
+    <color name="badge_reading_bg">#FFFAE3C8</color>
+    <color name="badge_reading_text">#FF3B2314</color>
+    <color name="badge_finished_bg">#FFD9EDE5</color>
+    <color name="badge_finished_text">#FF2A5E46</color>
+    <color name="badge_wishlist_bg">#FFDCE7F2</color>
+    <color name="badge_wishlist_text">#FF2B4A6F</color>
+
+    <!-- Bottom Navigation -->
+    <color name="nav_background">#FF3B2314</color>
+    <color name="nav_selected">#FFE8924E</color>
+    <color name="nav_unselected">#FFFAE3C8</color>
+
+    <!-- Rating Stars -->
+    <color name="star_filled">#FFC0602A</color>
+    <color name="star_empty">#FFFAE3C8</color>
+
+</resources>

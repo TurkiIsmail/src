@@ -1,0 +1,7 @@
+<resources>
+    <style name="Base.Theme.Test" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/burnt_sienna</item>
+        <item name="colorPrimaryVariant">@color/deep_mahogany</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+</resources>
