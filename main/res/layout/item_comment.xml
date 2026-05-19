@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:rating="0"
+                android:isIndicator="true"
                 android:stepSize="0.5"
                 android:scaleX="0.7"
                 android:scaleY="0.7"

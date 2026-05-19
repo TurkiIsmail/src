@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.babelio.R;
 import com.example.babelio.adapters.BooksAdapter;
@@ -39,6 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
     private RecyclerView booksRecyclerView;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private BooksAdapter booksAdapter;
     private List<Book> booksList = new ArrayList<>();
     private DatabaseHelper dbHelper;
@@ -57,6 +59,7 @@ public class HomeFragment extends Fragment {
         // Initialize UI
         booksRecyclerView = view.findViewById(R.id.booksRecyclerView);
         progressBar = view.findViewById(R.id.progressBar);
+        swipeRefreshLayout = view.findViewById(R.id.homeSwipeRefresh);
 
         // Setup RecyclerView with GridLayout (2 columns)
         booksAdapter = new BooksAdapter(booksList);
@@ -66,6 +69,8 @@ public class HomeFragment extends Fragment {
 
         dbHelper = new DatabaseHelper(requireContext());
         firebaseHelper = new FirebaseHelper();
+
+        swipeRefreshLayout.setOnRefreshListener(this::loadBooksFromFirestore);
 
         // Load books from Firestore
         loadBooksFromFirestore();
@@ -89,6 +94,7 @@ public class HomeFragment extends Fragment {
                 } else {
                     booksAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
@@ -96,6 +102,7 @@ public class HomeFragment extends Fragment {
             public void onFailure(String error) {
                 Toast.makeText(requireContext(), "Cloud Sync Failed: " + error, Toast.LENGTH_SHORT).show();
                 loadBooksFromSQLite();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -128,6 +135,9 @@ public class HomeFragment extends Fragment {
         booksList.addAll(dbHelper.getAllBooks());
         booksAdapter.notifyDataSetChanged();
         progressBar.setVisibility(View.GONE);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     /**

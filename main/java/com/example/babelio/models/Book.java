@@ -43,6 +43,18 @@ public class Book implements Serializable {
         this.timestamp = System.currentTimeMillis();
     }
 
+    public Book(String id, String title, String author, String genre, String description, String imageUrl) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre != null ? genre : "Fiction";
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.rating = 0.0;
+        this.reviewCount = 0;
+        this.timestamp = System.currentTimeMillis();
+    }
+
     // Getters and Setters
     public String getId() {
         return id;

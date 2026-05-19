@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.babelio.R;
 import com.example.babelio.adapters.BooksAdapter;
@@ -32,6 +33,7 @@ public class SearchFragment extends Fragment {
     private EditText searchEditText;
     private RecyclerView searchResultsRecyclerView;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private BooksAdapter booksAdapter;
     private List<Book> allBooks = new ArrayList<>();
     private List<Book> filteredResults = new ArrayList<>();
@@ -51,6 +53,7 @@ public class SearchFragment extends Fragment {
         searchEditText = view.findViewById(R.id.searchEditText);
         searchResultsRecyclerView = view.findViewById(R.id.searchResultsRecyclerView);
         progressBar = view.findViewById(R.id.progressBar);
+        swipeRefreshLayout = view.findViewById(R.id.searchSwipeRefresh);
 
         // Setup RecyclerView with filtered list
         booksAdapter = new BooksAdapter(filteredResults);
@@ -59,6 +62,8 @@ public class SearchFragment extends Fragment {
         searchResultsRecyclerView.setAdapter(booksAdapter);
 
         firebaseHelper = new FirebaseHelper();
+
+        swipeRefreshLayout.setOnRefreshListener(this::loadAllBooksFromFirestore);
         
         // Load all books from Firestore once
         loadAllBooksFromFirestore();
@@ -92,6 +97,7 @@ public class SearchFragment extends Fragment {
                     filteredResults.addAll(allBooks);
                     booksAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
@@ -100,6 +106,7 @@ public class SearchFragment extends Fragment {
                 if (isAdded()) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
         });

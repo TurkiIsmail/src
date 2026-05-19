@@ -6,6 +6,17 @@
     <color name="color_secondary">#A5D6A7</color>
     <color name="color_accent">#FFC107</color>
     
+    <!-- Premium Beblio Palette -->
+    <color name="beblio_cream">#F5F0E8</color>
+    <color name="beblio_sage">#4A8C6E</color>
+    <color name="beblio_brown">#4A3728</color>
+    <color name="beblio_beige">#F9F5F0</color>
+    <color name="beblio_accent">#E8924E</color>
+    <color name="beblio_text_primary">#2D1B0F</color>
+    <color name="beblio_text_secondary">#6D5D51</color>
+    <color name="beblio_card_shadow">#1A000000</color>
+    <color name="beblio_premium_gold">#FFD700</color>
+
     <!-- Basic Colors -->
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>

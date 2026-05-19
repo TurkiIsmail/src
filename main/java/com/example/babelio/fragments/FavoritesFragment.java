@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.babelio.R;
 import com.example.babelio.adapters.BooksAdapter;
@@ -29,6 +30,7 @@ import java.util.List;
 public class FavoritesFragment extends Fragment {
     private RecyclerView favoriteBooksRecyclerView;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private BooksAdapter booksAdapter;
     private List<Book> favoriteBooks = new ArrayList<>();
     private FirebaseHelper firebaseHelper;
@@ -46,6 +48,7 @@ public class FavoritesFragment extends Fragment {
         // Initialize UI
         favoriteBooksRecyclerView = view.findViewById(R.id.favoriteBooksRecyclerView);
         progressBar = view.findViewById(R.id.progressBar);
+        swipeRefreshLayout = view.findViewById(R.id.favoritesSwipeRefresh);
 
         // Setup RecyclerView with GridLayout (2 columns)
         booksAdapter = new BooksAdapter(favoriteBooks);
@@ -54,6 +57,8 @@ public class FavoritesFragment extends Fragment {
         favoriteBooksRecyclerView.setAdapter(booksAdapter);
 
         firebaseHelper = new FirebaseHelper();
+
+        swipeRefreshLayout.setOnRefreshListener(this::loadFavoritesFromFirestore);
 
         // Load favorites from Firestore
         loadFavoritesFromFirestore();
@@ -72,6 +77,7 @@ public class FavoritesFragment extends Fragment {
                     favoriteBooks.addAll(books);
                     booksAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
@@ -80,6 +86,7 @@ public class FavoritesFragment extends Fragment {
                 if (isAdded()) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
         });

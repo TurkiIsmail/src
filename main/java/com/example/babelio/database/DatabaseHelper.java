@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "Babelio.db";
+    private static final String DATABASE_NAME = "Shelfy.db";
     private static final int DATABASE_VERSION = 2;
 
     // Table Names

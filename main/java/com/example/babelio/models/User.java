@@ -13,6 +13,7 @@ public class User implements Serializable {
     private String bio;
     private int favoritesCount;
     private int reviewsCount;
+    private String role;
     private long createdAt;
 
     public User() {
@@ -26,6 +27,7 @@ public class User implements Serializable {
         this.bio = "";
         this.favoritesCount = 0;
         this.reviewsCount = 0;
+        this.role = "user";
         this.createdAt = System.currentTimeMillis();
     }
 
@@ -92,5 +94,13 @@ public class User implements Serializable {
 
     public void setCreatedAt(long createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

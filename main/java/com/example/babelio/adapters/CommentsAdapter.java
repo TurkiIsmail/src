@@ -72,8 +72,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             commentTextTextView.setText(comment.getText());
             ratingBar.setRating((float) comment.getRating());
 
-            // Format timestamp
-            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+            // Format timestamp (e.g., "Oct 24, 2023 • 14:30")
+            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy • HH:mm", Locale.getDefault());
             String dateString = sdf.format(new Date(comment.getTimestamp()));
             dateTextView.setText(dateString);
 

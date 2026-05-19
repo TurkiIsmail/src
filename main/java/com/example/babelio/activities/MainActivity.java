@@ -7,12 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.cloudinary.android.MediaManager;
 import com.example.babelio.R;
 import com.example.babelio.fragments.FavoritesFragment;
 import com.example.babelio.fragments.HomeFragment;
 import com.example.babelio.fragments.ProfileFragment;
 import com.example.babelio.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Main Activity with Bottom Navigation
@@ -25,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize Cloudinary
+        try {
+            Map<String, String> config = new HashMap<>();
+            config.put("cloud_name", "dytxvcoba");
+            config.put("secure", "true");
+            MediaManager.init(this, config);
+        } catch (IllegalStateException e) {
+            // Already initialized
+        }
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         setupBottomNavigation();

@@ -11,7 +11,7 @@ public class Constants {
     public static final String FAVORITES_COLLECTION = "favorites";
 
     // Preferences
-    public static final String PREF_NAME = "BabelioPrefs";
+    public static final String PREF_NAME = "ShelfyPrefs";
     public static final String PREF_USER_ID = "user_id";
     public static final String PREF_USER_NAME = "user_name";
     public static final String PREF_USER_EMAIL = "user_email";

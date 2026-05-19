@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bookDetailSwipeRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beblio_beige">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:background="@android:color/white">
+        android:background="@color/beblio_beige">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
@@ -58,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="Book Title"
                 android:textSize="28sp"
-                android:textColor="#212121"
+                android:textColor="@color/beblio_text_primary"
                 android:fontFamily="sans-serif-black" />
 
             <TextView
@@ -67,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="By Author"
                 android:textSize="18sp"
-                android:textColor="#757575"
+                android:textColor="@color/beblio_text_secondary"
                 android:layout_marginTop="4dp" />
 
             <LinearLayout
@@ -79,10 +84,12 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
-                    android:rating="4.5" />
+                    android:isIndicator="true"
+                    android:rating="0" />
 
                 <View
                     android:layout_width="1dp"
@@ -96,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:text="Classic"
                     android:textSize="14sp"
-                    android:textColor="#3F51B5"
+                    android:textColor="@color/beblio_beige"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp" />
             </LinearLayout>
@@ -104,7 +111,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#F5F5F5"
+                android:background="@color/beblio_cream"
                 android:layout_marginVertical="24dp" />
 
             <TextView
@@ -112,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:text="Synopsis"
                 android:textSize="18sp"
-                android:textColor="#212121"
+                android:textColor="@color/beblio_text_primary"
                 android:fontFamily="sans-serif-medium" />
 
             <TextView
@@ -121,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:text="Book description goes here..."
                 android:textSize="16sp"
-                android:textColor="#424242"
+                android:textColor="@color/beblio_text_secondary"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginTop="8dp" />
 
@@ -132,7 +139,7 @@
                 android:text="Add to Library"
                 android:layout_marginTop="32dp"
                 app:cornerRadius="28dp"
-                app:backgroundTint="@color/color_primary"
+                app:backgroundTint="@color/beblio_sage"
                 android:textColor="@color/color_white" />
 
             <com.google.android.material.button.MaterialButton
@@ -142,15 +149,37 @@
                 android:layout_height="56dp"
                 android:text="Write a Review"
                 android:layout_marginTop="8dp"
-                app:rippleColor="@color/color_primary"
-                android:textColor="@color/color_primary" />
+                app:rippleColor="@color/beblio_sage"
+                android:textColor="@color/beblio_sage" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editBookButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Edit Book"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:cornerRadius="28dp"
+                app:backgroundTint="@color/beblio_cream"
+                android:textColor="@color/beblio_brown" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteBookButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Delete Book"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:rippleColor="@android:color/holo_red_dark"
+                android:textColor="@android:color/holo_red_dark" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Community Reviews"
                 android:textSize="18sp"
-                android:textColor="#212121"
+                android:textColor="@color/beblio_text_primary"
                 android:layout_marginTop="32dp"
                 android:fontFamily="sans-serif-medium" />
 
@@ -160,6 +189,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:nestedScrollingEnabled="false" />
+
+            <LinearLayout
+                android:id="@+id/emptyCommentsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="24dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    app:tint="@color/beblio_cream" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No reviews yet. Be the first to write one!"
+                    android:textColor="@color/beblio_text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -171,4 +224,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
